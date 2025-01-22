@@ -18,7 +18,7 @@
             background-size: cover;
             position: relative;
         }
-        .container, .question, .final, .result {
+        .container, .question, .final, .result, .levelUp {
             text-align: center;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
@@ -60,7 +60,7 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        .question button, .final button {
+        .question button, .final button, .levelUp button {
             background-color: #e63946;
             color: white;
             border: none;
@@ -78,7 +78,7 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
-        .question button:hover, .final button:hover {
+        .question button:hover, .final button:hover, .levelUp button:hover {
             background-color: #d62828;
         }
         .response {
@@ -98,7 +98,6 @@
             margin: 20px 0;
             color: #e63946;
         }
-        /* Parallax Background */
         .parallax {
             position: absolute;
             top: 0;
@@ -131,6 +130,12 @@
         <div class="response" id="response"></div>
     </div>
 
+    <div class="levelUp" id="levelUp" style="display:none;">
+        <h1>Level Up! 🏆</h1>
+        <p>You've earned some points, let's keep going! 💪</p>
+        <button id="nextLevelButton">Next Level 🚀</button>
+    </div>
+
     <div class="final" id="final" style="display:none;">
         <h1>Let’s make this official! 🥳</h1>
         <div class="countdown" id="countdown">3</div>
@@ -147,11 +152,14 @@
         const orchid = document.getElementById('orchid');
         const intro = document.getElementById('intro');
         const question = document.getElementById('question');
+        const levelUp = document.getElementById('levelUp');
         const final = document.getElementById('final');
         const result = document.getElementById('result');
         const countdown = document.getElementById('countdown');
+        const nextLevelButton = document.getElementById('nextLevelButton');
         let countdownTimer;
-        let score = 0;  // Track score based on choices
+        let score = 0;
+        let level = 1;
 
         orchid.addEventListener('click', function() {
             intro.style.opacity = 0;
@@ -162,24 +170,35 @@
         });
 
         document.getElementById('yesButton').addEventListener('click', function() {
-            score += 10;  // Positive score for choosing Yes
+            score += 10;
             document.getElementById('response').textContent = "Yay! 🎉 You've just made my heart skip a beat 💖";
             showHeartAnimation();
             setTimeout(() => {
                 question.style.display = 'none';
-                final.style.display = 'block';
-                startCountdown();
+                if (level < 3) {
+                    level++;
+                    levelUp.style.display = 'block';
+                } else {
+                    final.style.display = 'block';
+                    startCountdown();
+                }
             }, 2000);
         });
 
         document.getElementById('noButton').addEventListener('click', function() {
-            score -= 5;  // Negative score for choosing No
+            score -= 5;
             document.getElementById('response').textContent = "You ain’t got no other option my baby! 😜";
             showHeartAnimation();
             setTimeout(() => {
                 question.style.display = 'none';
                 result.style.display = 'block';
             }, 2000);
+        });
+
+        nextLevelButton.addEventListener('click', function() {
+            levelUp.style.display = 'none';
+            question.style.display = 'block';
+            document.getElementById('response').textContent = '';
         });
 
         function startCountdown() {
@@ -216,7 +235,7 @@
         }
 
         document.getElementById('celebrateButton').addEventListener('click', function() {
-            if (score >= 10) {
+            if (score >= 20) {
                 final.innerHTML = `<h1>Celebration Time! 🎉💖</h1>
                                    <p>Manaar, you’re my Valentine and forever will be! 😘</p>
                                    <button onclick="location.reload()">Start Again? 🔄</button>`;

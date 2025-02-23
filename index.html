@@ -3,246 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine? 💖</title>
+    <title>Will You Be Mine? 💖</title>
     <style>
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333;
-            overflow: hidden;
-            background-size: cover;
-            position: relative;
-        }
-        .container, .question, .final, .result, .levelUp {
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 20px 40px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 500px;
-            transition: opacity 1s ease-in-out;
-        }
-        .orchid, .heart, .confetti, .emoji {
-            width: 120px;
-            height: 120px;
-            background: url('https://m.media-amazon.com/images/I/81dt8ouOEwL.jpg') no-repeat center;
-            background-size: cover;
-            border-radius: 50%;
-            animation: float 3s infinite ease-in-out;
-            cursor: pointer;
-            margin: 20px 0;
-        }
-        .heart {
-            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e4/Heart_icon_%28red%29.svg') no-repeat center;
-            background-size: contain;
-        }
-        .emoji {
-            font-size: 50px;
-            cursor: pointer;
-            margin: 10px;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            background-color: #ffccff;
+            font-family: Arial, sans-serif;
         }
         h1 {
-            font-size: 2rem;
-            color: #e63946;
-            animation: bounce 1s infinite;
+            color: #ff3399;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .container {
+            margin-top: 50px;
         }
-        .question button, .final button, .levelUp button {
-            background-color: #e63946;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.5rem;
-            border-radius: 12px;
-            cursor: pointer;
+        .btn {
+            font-size: 20px;
+            padding: 15px;
             margin: 10px;
-            transition: background-color 0.3s;
-            transform: scale(1);
-            animation: pulse 1.5s infinite;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .yes {
+            background-color: #66ff66;
         }
-        .question button:hover, .final button:hover, .levelUp button:hover {
-            background-color: #d62828;
+        .no {
+            background-color: #ff6666;
         }
-        .response {
-            font-size: 1.5rem;
-            margin-top: 20px;
-            animation: fadeIn 2s;
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .final {
-            display: none;
-        }
-        .countdown {
-            font-size: 2rem;
-            margin: 20px 0;
-            color: #e63946;
-        }
-        .parallax {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1506129639077-9b208d3ab276?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjA0OXwwfDF8c2VhcmNofDExfHxzdXJmZXxlbnwwfHx8fDE2NzE4OTM2MTk&ixlib=rb-1.2.1&q=80&w=1080');
-            background-position: center;
-            background-size: cover;
-            z-index: -1;
-            animation: parallax 10s infinite linear;
-        }
-        @keyframes parallax {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
+        .btn:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="parallax"></div>
-    <div class="container" id="intro">
-        <h1>Click on the orchid to start this love-filled adventure! 💐</h1>
-        <div class="orchid" id="orchid"></div>
-    </div>
-
-    <div class="question" id="question" style="display:none;">
-        <h1>Manaar, will you be my Valentine? 💖</h1>
-        <button id="yesButton">Yes 💖</button>
-        <button id="noButton">No 💔</button>
-        <div class="response" id="response"></div>
-    </div>
-
-    <div class="levelUp" id="levelUp" style="display:none;">
-        <h1>Level Up! 🏆</h1>
-        <p>You've earned some points, let's keep going! 💪</p>
-        <button id="nextLevelButton">Next Level 🚀</button>
-    </div>
-
-    <div class="final" id="final" style="display:none;">
-        <h1>Let’s make this official! 🥳</h1>
-        <div class="countdown" id="countdown">3</div>
-        <button id="celebrateButton">Let's Celebrate! 🎉</button>
-    </div>
-
-    <div class="result" id="result" style="display:none;">
-        <h1>Game Over! 💔</h1>
-        <p>Don't worry, there are more adventures to come! 💪</p>
-        <button onclick="location.reload()">Try Again? 🔄</button>
+    <h1>Will You Be Mine? 💖</h1>
+    <img src="your-cute-image.jpg" alt="Cute Image" width="300px">
+    <div class="container">
+        <button class="btn yes" onclick="yesClicked()">Yes 💕</button>
+        <button class="btn no" onclick="noClicked()">No 😢</button>
     </div>
 
     <script>
-        const orchid = document.getElementById('orchid');
-        const intro = document.getElementById('intro');
-        const question = document.getElementById('question');
-        const levelUp = document.getElementById('levelUp');
-        const final = document.getElementById('final');
-        const result = document.getElementById('result');
-        const countdown = document.getElementById('countdown');
-        const nextLevelButton = document.getElementById('nextLevelButton');
-        let countdownTimer;
-        let score = 0;
-        let level = 1;
-
-        orchid.addEventListener('click', function() {
-            intro.style.opacity = 0;
-            setTimeout(() => {
-                intro.style.display = 'none';
-                question.style.display = 'block';
-            }, 1000);
-        });
-
-        document.getElementById('yesButton').addEventListener('click', function() {
-            score += 10;
-            document.getElementById('response').textContent = "Yay! 🎉 You've just made my heart skip a beat 💖";
-            showHeartAnimation();
-            setTimeout(() => {
-                question.style.display = 'none';
-                if (level < 3) {
-                    level++;
-                    levelUp.style.display = 'block';
-                } else {
-                    final.style.display = 'block';
-                    startCountdown();
-                }
-            }, 2000);
-        });
-
-        document.getElementById('noButton').addEventListener('click', function() {
-            score -= 5;
-            document.getElementById('response').textContent = "You ain’t got no other option my baby! 😜";
-            showHeartAnimation();
-            setTimeout(() => {
-                question.style.display = 'none';
-                result.style.display = 'block';
-            }, 2000);
-        });
-
-        nextLevelButton.addEventListener('click', function() {
-            levelUp.style.display = 'none';
-            question.style.display = 'block';
-            document.getElementById('response').textContent = '';
-        });
-
-        function startCountdown() {
-            let seconds = 3;
-            countdownTimer = setInterval(() => {
-                countdown.textContent = seconds;
-                seconds--;
-                if (seconds < 0) {
-                    clearInterval(countdownTimer);
-                    showCelebration();
-                }
-            }, 1000);
+        function yesClicked() {
+            document.body.innerHTML = '<h1>YAY! I LOVE YOU! ❤️💖🎉</h1>';
         }
-
-        function showCelebration() {
-            document.getElementById('celebrateButton').style.display = 'block';
-            countdown.style.display = 'none';
-            document.body.appendChild(createConfetti());
+        function noClicked() {
+            alert("U thought u could leave me baby? Ur mine 😘");
         }
-
-        function showHeartAnimation() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            document.body.appendChild(heart);
-            setTimeout(() => {
-                heart.remove();
-            }, 2000);
-        }
-
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            return confetti;
-        }
-
-        document.getElementById('celebrateButton').addEventListener('click', function() {
-            if (score >= 20) {
-                final.innerHTML = `<h1>Celebration Time! 🎉💖</h1>
-                                   <p>Manaar, you’re my Valentine and forever will be! 😘</p>
-                                   <button onclick="location.reload()">Start Again? 🔄</button>`;
-            } else {
-                result.style.display = 'block';
-            }
-        });
     </script>
 </body>
 </html>
